@@ -2,3 +2,6 @@ data/*
 **/__pycache*
 .DS_Store
 .pyc
+PDFReader.txt
+pymupdf4llm.md
+
