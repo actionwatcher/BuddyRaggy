@@ -1,0 +1,24 @@
+# Core dependencies
+chromadb>=0.5.3
+whoosh>=2.7.4
+sentence-transformers>=3.0.1
+pymupdf>=1.24.7
+typer>=0.12.3
+pyyaml>=6.0.2
+tqdm>=4.66.5
+
+# Web/API interface
+fastapi>=0.115.0
+uvicorn>=0.30.6
+
+# Optional: embedding / ML stack support
+torch>=2.2.0
+transformers>=4.43.3
+
+# Optional: PDF, HTML, or document parsing
+beautifulsoup4>=4.12.3
+
+# Optional: testing & development
+pytest>=8.3.2
+ruff>=0.5.7
+mypy>=1.10.1

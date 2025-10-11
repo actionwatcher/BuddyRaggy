@@ -1,0 +1,50 @@
+project:
+  id: "demo"
+  root_dir: "/Users/arkady/sources/aina/"
+  index_dir: "./data/indices/metashape"
+
+ingestion:
+  include_globs: [".py", ".cpp", ".h", ".md", ".pdf", ".txt"]
+  exclude_globs: [".git", "node_modules"]
+
+chunking:
+  code:
+    strategy: "tree_sitter"
+    max_tokens: 320
+    overlap_tokens: 32
+  text:
+    strategy: "semantic"
+    max_tokens: 400
+    overlap_tokens: 60
+
+embedding:
+  text_model: "intfloat/e5-base-v2"
+  code_model: "intfloat/e5-base-v2"
+  batch_size: 64
+  device: "mps"   # "cpu" | "cuda" | "mps" | "auto"
+
+vector_store:
+  provider: "chroma"
+  collection: "demo"
+
+bm25:
+  enabled: true
+
+retrieval:
+  top_k: 8
+  alpha_dense: 0.7  # fusion weight: dense vs BM25
+  rrf: true
+
+llm:
+  backend: "ollama"  # "ollama" | "openai"
+  model: "llama3.1:8b"
+  max_output_tokens: 768
+  temperature: 0.2
+
+prompting:
+  mode_default: "answer"
+  system_message: |
+    You are assisting in understanding documentation and code base. Answer using only provided context. Cite file paths.
+
+security:
+  offline_only: true
