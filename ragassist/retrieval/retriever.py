@@ -1,7 +1,7 @@
 import numpy as np
 from typing import List, Dict
 from sentence_transformers import SentenceTransformer
-from ..types import RetrievalHit, Chunk
+from ..mytypes import RetrievalHit, Chunk
 
 class Retriever:
     def __init__(self, vector_store, bm25_store, embed_model: str, alpha_dense: float = 0.7, rrf: bool = True):

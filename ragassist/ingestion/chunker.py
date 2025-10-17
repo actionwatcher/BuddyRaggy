@@ -1,5 +1,5 @@
 from typing import List
-from ..types import Chunk
+from ..mytypes import Chunk
 import uuid
 # optional: tree_sitter integration for better code segmentation
 

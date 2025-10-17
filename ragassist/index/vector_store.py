@@ -2,7 +2,7 @@ from chromadb import Client
 from chromadb.config import Settings
 import numpy as np
 from typing import List
-from ..types import Chunk
+from ..mytypes import Chunk
 
 class VectorStore:
     def __init__(self, collection: str, persist_dir: str):

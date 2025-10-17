@@ -10,15 +10,6 @@ tqdm>=4.66.5
 # Web/API interface
 fastapi>=0.115.0
 uvicorn>=0.30.6
+llama-index
+pymupdf4llm
 
-# Optional: embedding / ML stack support
-torch>=2.2.0
-transformers>=4.43.3
-
-# Optional: PDF, HTML, or document parsing
-beautifulsoup4>=4.12.3
-
-# Optional: testing & development
-pytest>=8.3.2
-ruff>=0.5.7
-mypy>=1.10.1

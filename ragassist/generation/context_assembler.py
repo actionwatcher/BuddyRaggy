@@ -1,5 +1,5 @@
 from typing import List
-from ..types import RetrievalHit
+from ..mytypes import RetrievalHit
 
 class ContextAssembler:
     def build(self, query: str, hits: List[RetrievalHit], token_budget: int = 6000) -> str:

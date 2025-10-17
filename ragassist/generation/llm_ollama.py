@@ -1,5 +1,5 @@
 import ollama
-from ..types import LLMResponse
+from ..mytypes import LLMResponse
 from .llm_base import LLMBase
 
 class LLMOllama(LLMBase):
@@ -26,7 +26,7 @@ class LLMOllama(LLMBase):
             model=self.model,
             messages=[
                 {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"context:\n{retrievals}\n\n [Task]: {result['message']['content'].strip()}"}
+                {"role": "user", "content": f"context:\n{retrievals}\n\n [Task]: {user_prompt}"}
                 ]
         )
         text = result['message']['content'].strip()

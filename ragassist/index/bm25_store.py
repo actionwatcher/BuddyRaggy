@@ -3,7 +3,7 @@ from whoosh.index import create_in, open_dir
 from whoosh.qparser import QueryParser
 from pathlib import Path
 from typing import List
-from ..types import Chunk
+from ..mytypes import Chunk
 
 class BM25Store:
     def __init__(self, index_dir: str):

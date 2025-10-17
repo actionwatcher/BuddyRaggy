@@ -29,7 +29,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Test the extract_text function on a file.")
-    parser.add_argument("--fpath", type=str, default="./test_data/test.py", help="Path to input file (PDF or text).")
+    parser.add_argument("--fpath", type=str, default="./rag_test/paper/2509.25122v1.pdf", help="Path to input file (PDF or text).")
 
     args = parser.parse_args()
 
@@ -46,11 +46,11 @@ if __name__ == "__main__":
     print(f"Extracted text from {fpath} ({ftype}):")
     print("=" * 80)
     print(text)  # print first 2000 chars for inspection
-    with open("pymupdf4llm.md", "w") as f:
+    with open("pymupdf4llm.md", "w", encoding='utf-8') as f:
         f.write(text)
     print("X"*80, "\n\n")
     c = "\n".join(text_llama)
     print(c)
-    with open("PDFReader.txt", "w") as f:
+    with open("PDFReader.txt", "w", encoding='utf-8') as f:
         f.write(c)
     

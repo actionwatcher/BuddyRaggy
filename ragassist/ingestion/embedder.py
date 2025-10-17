@@ -1,7 +1,7 @@
 from typing import List, Dict
 from sentence_transformers import SentenceTransformer
 import numpy as np
-from ..types import Chunk
+from ..mytypes import Chunk
 
 class Embedder:
     def __init__(self, text_model: str, code_model: str, device: str = "auto"):
