@@ -57,5 +57,25 @@ def ask(q: str, config: str = "configs/default.yaml"):
     resp = llm.generate(system, ctx, q, cfg["llm"]["max_output_tokens"], cfg["llm"]["temperature"])
     print(resp.answer)
 
+@app.command()
+def chat(config: str = "configs/default.yaml"):
+    cfg = load_cfg(config)
+    vec = VectorStore(cfg["vector_store"]["collection"], cfg["project"]["index_dir"])
+    bm25 = BM25Store(cfg["project"]["index_dir"]) if cfg["bm25"]["enabled"] else None
+    retr = Retriever(vec, bm25, embed_model=cfg["embedding"]["text_model"],
+                     alpha_dense=cfg["retrieval"]["alpha_dense"], rrf=cfg["retrieval"]["rrf"])
+    system = cfg["prompting"]["system_message"]
+    llm = LLMOllama(cfg["llm"]["model"])
+
+    while(True):
+        q = input("Task: ")
+        if q == "\\bye":
+            print("exiting...")
+            break
+        hits = retr.retrieve(q, k=cfg["retrieval"]["top_k"])
+        ctx = ContextAssembler().build(q, hits)
+        resp = llm.generate(system, ctx, q, cfg["llm"]["max_output_tokens"], cfg["llm"]["temperature"])
+        print(resp.answer)
+
 if __name__ == "__main__":
     app()
