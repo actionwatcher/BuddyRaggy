@@ -26,7 +26,7 @@ class LLMOllama(LLMBase):
             model=self.model,
             messages=[
                 {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"context:\n{retrievals}\n\n [Task]: {user_prompt}"}
+                {"role": "user", "content": f"context:\n{retrievals}\n\n [Task]: {result['message']['content'].strip()}"}
                 ]
         )
         text = result['message']['content'].strip()

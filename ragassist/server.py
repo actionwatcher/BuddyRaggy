@@ -5,14 +5,14 @@ from .index.vector_store import VectorStore
 from .index.bm25_store import BM25Store
 from .retrieval.retriever import Retriever
 from .generation.context_assembler import ContextAssembler
-from .generation.llm_ollama import LLMOllama
+from .generation.llm_factory import get_model
 
 app = FastAPI()
 cfg = load_cfg("configs/default.yaml")
 vec = VectorStore(cfg["vector_store"]["collection"], cfg["project"]["index_dir"])
 bm25 = BM25Store(cfg["project"]["index_dir"]) if cfg["bm25"]["enabled"] else None
 retr = Retriever(vec, bm25, embed_model=cfg["embedding"]["text_model"], alpha_dense=cfg["retrieval"]["alpha_dense"], rrf=cfg["retrieval"]["rrf"])
-llm = LLMOllama(cfg["llm"]["model"])
+llm = get_model(cfg["llm"])
 assembler = ContextAssembler()
 
 class Query(BaseModel):

@@ -7,7 +7,7 @@ from .index.vector_store import VectorStore
 from .index.bm25_store import BM25Store
 from .retrieval.retriever import Retriever
 from .generation.context_assembler import ContextAssembler
-from .generation.llm_ollama import LLMOllama
+from .generation.llm_factory import get_model
 
 app = typer.Typer()
 
@@ -53,7 +53,7 @@ def ask(q: str, config: str = "configs/default.yaml"):
     hits = retr.retrieve(q, k=cfg["retrieval"]["top_k"])
     ctx = ContextAssembler().build(q, hits)
     system = cfg["prompting"]["system_message"]
-    llm = LLMOllama(cfg["llm"]["model"])
+    llm = get_model(cfg["llm"])
     resp = llm.generate(system, ctx, q, cfg["llm"]["max_output_tokens"], cfg["llm"]["temperature"])
     print(resp.answer)
 
@@ -65,7 +65,7 @@ def chat(config: str = "configs/default.yaml"):
     retr = Retriever(vec, bm25, embed_model=cfg["embedding"]["text_model"],
                      alpha_dense=cfg["retrieval"]["alpha_dense"], rrf=cfg["retrieval"]["rrf"])
     system = cfg["prompting"]["system_message"]
-    llm = LLMOllama(cfg["llm"]["model"])
+    llm = get_model(cfg["llm"])
 
     while(True):
         q = input("Task: ")
